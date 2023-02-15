@@ -1,30 +1,21 @@
 <script lang="ts">
 import AuthForm from "./components/AuthForm.vue";
-import axios from "axios";
+import Sidebar from "./components/Sidebar.vue";
+import Tables from "./components/Tables.vue";
 
 export default {
-  components: { AuthForm },
-  data() {
-    return {
-      forecasts: [] as any[]
-    }
-  },
-  async created() {
-    const response = await axios.get('http://localhost:5260/WeatherForecast')
-    this.forecasts = response.data
-  }
+  components: {Tables, Sidebar, AuthForm },
 };
 </script>
 
 <template>
-  <AuthForm />
-  <div>
-    <ul v-for="forecast in forecasts" :key="forecast.date">
-      <li>{{ forecast.date }}: {{ forecast.temperatureC }}°C</li>
-    </ul>
-  </div>
+  <AuthForm class="auth" />
+  <Sidebar />
+  <Tables />
 </template>
 
 <style scoped>
-
+.auth {
+  display: none;
+}
 </style>
